@@ -8,6 +8,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardAction,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 
 interface Masterfiles {
   items: Item[];
@@ -72,43 +82,43 @@ export default function MenuScreen() {
   }, [selectedItemGroup]);
 
   return (
-    <Dialog
-      open={!!selectedDepartment}
-      onOpenChange={() => setSelectedDepartment(undefined)}
-    >
-      <ul className="grid grid-cols-2 gap-4">
-        {masterfiles.departments.map((department) => (
-          <li
-            key={department.ID}
-            className="p-4 bg-white shadow rounded cursor-pointer"
-            onClick={() => setSelectedDepartment(department)}
-          >
-            <p className="font-semibold">{department.Name}</p>
-          </li>
-        ))}
-      </ul>
-
-      <DialogContent className="max-w-md">
-        <DialogHeader>
-          <DialogTitle>{selectedDepartment?.Name}</DialogTitle>
-          <DialogDescription>Items under this department</DialogDescription>
-        </DialogHeader>
-
-        <ul className="space-y-2 mt-4">
-          {selectedItemGroup.length === 0 && (
-            <p className="text-sm text-muted-foreground">No items found.</p>
-          )}
-          {selectedItemGroup.map((item) => (
-            <li
-              key={item.ID}
-              className="border rounded p-3 hover:bg-muted transition"
-            >
-              <p className="font-medium">{item.Description}</p>
-              <p className="text-sm text-gray-500">₱{item.Price.toFixed(2)}</p>
-            </li>
-          ))}
-        </ul>
-      </DialogContent>
-    </Dialog>
+    <div className="grid grid-cols-2 gap-4">
+      {masterfiles.departments.map((department) => (
+        <DepartmentGroup
+          department={department}
+          key={department.ID}
+          onClick={() => setSelectedDepartment(department)}
+        />
+      ))}
+    </div>
   );
 }
+
+interface DepartmentGroupProps {
+  department: Department;
+  onClick: () => void;
+}
+const DepartmentGroup: React.FC<DepartmentGroupProps> = ({
+  department,
+  onClick,
+}) => {
+  return (
+    <Card
+      onClick={onClick}
+      className="w-full max-w-sm cursor-pointer hover:shadow-lg transition"
+    >
+      <CardHeader>
+        <CardDescription>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-lg font-semibold">
+              {department.Name}
+            </CardTitle>
+            <span className="text-sm text-gray-500">
+              Order No: {department.OrderNo}
+            </span>
+          </div>
+        </CardDescription>
+      </CardHeader>
+    </Card>
+  );
+};

@@ -56,7 +56,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="min-h-full flex justify-center items-center p-4"
+                className="min-h-full p-4"
               >
                 <Component />
               </motion.div>
