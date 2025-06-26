@@ -1,5 +1,4 @@
 import { getConnection } from '@/lib/db';
-import sql from 'mssql';
 
 export async function GET() {
   try {

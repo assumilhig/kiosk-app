@@ -2,9 +2,9 @@ import sql from "mssql";
 
 const config = {
   user: "sa",
-  password: "0198",
+  password: "psc",
   server: "127.0.0.1", // or IP address / remote hostname
-  database: "RWSERVER",
+  database: "RWSERVER_IPPUDO",
   options: {
     encrypt: false, // Set true for Azure
     trustServerCertificate: true,
