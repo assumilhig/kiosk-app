@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { AppProvider } from "@/context/AppContext";
-import { useState, Suspense, lazy } from "react";
+import { useState, Suspense, lazy, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 // Lazy-loaded screens
@@ -38,8 +38,8 @@ export default function Home() {
     <AppProvider>
       <div className="h-dvh flex flex-col bg-gray-50">
         {/* 🔼 Top bar (Logo) */}
-        <div className="p-2 flex items-center justify-center">
-          <img src="/logo.svg" alt="Logo" className="h-20" />
+        <div className="p-8 flex items-center justify-center">
+          <img src="/logo.svg" alt="Logo" className="h-28" />
         </div>
 
         {/* Scrollable screen area */}
@@ -74,7 +74,9 @@ export default function Home() {
           {nextLabel && (
             <Button
               variant="outline"
-              onClick={() => goTo(currentIndex + 1)}
+              onClick={() => {
+                goTo(currentIndex + 1);
+              }}
               className="ml-4"
             >
               {nextLabel}
