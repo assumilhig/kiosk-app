@@ -1,22 +1,10 @@
 import axios from "@/lib/axios";
 import { useEffect, useState } from "react";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
-  CardAction,
-  CardContent,
-  CardFooter,
 } from "@/components/ui/card";
 
 interface Masterfiles {
@@ -73,7 +61,7 @@ export default function MenuScreen() {
       );
       setSelectedItemGroup(filteredItems);
     }
-  }, [selectedDepartment]);
+  }, [selectedDepartment, masterfiles.items]);
 
   useEffect(() => {
     if (selectedItemGroup) {

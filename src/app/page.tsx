@@ -2,15 +2,26 @@
 
 import { Button } from "@/components/ui/button";
 import { AppProvider } from "@/context/AppContext";
-import { useState, Suspense, lazy, useEffect } from "react";
+import { useState, Suspense, lazy } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 
 // Lazy-loaded screens
-const MainScreen = lazy(() => import("@/screens/MainScreen"));
-const MenuScreen = lazy(() => import("@/screens/MenuScreen"));
-const CartScreen = lazy(() => import("@/screens/CartScreen"));
-const DiscountScreen = lazy(() => import("@/screens/DiscountScreen"));
-const PaymentScreen = lazy(() => import("@/screens/PaymentScreen"));
+const CartScreen = lazy(() =>
+  import("@/screens").then((m) => ({ default: m.CartScreen }))
+);
+const DiscountScreen = lazy(() =>
+  import("@/screens").then((m) => ({ default: m.DiscountScreen }))
+);
+const MainScreen = lazy(() =>
+  import("@/screens").then((m) => ({ default: m.MainScreen }))
+);
+const MenuScreen = lazy(() =>
+  import("@/screens").then((m) => ({ default: m.MenuScreen }))
+);
+const PaymentScreen = lazy(() =>
+  import("@/screens").then((m) => ({ default: m.PaymentScreen }))
+);
 
 const screens = [
   { name: "Main", Component: MainScreen, nextLabel: "Enter" },
@@ -39,7 +50,7 @@ export default function Home() {
       <div className="h-dvh flex flex-col bg-gray-50">
         {/* 🔼 Top bar (Logo) */}
         <div className="p-8 flex items-center justify-center">
-          <img src="/logo.svg" alt="Logo" className="h-28" />
+          <Image src="/logo.svg" alt="Logo" width={112} height={112} />
         </div>
 
         {/* Scrollable screen area */}
@@ -67,12 +78,17 @@ export default function Home() {
         {/* Fixed bottom button bar */}
         <div className="sticky bottom-0 z-10 h-20 flex items-center justify-evenly">
           {currentIndex > 0 && (
-            <Button variant="outline" onClick={() => goTo(currentIndex - 1)}>
+            <Button
+              size={"lg"}
+              variant="outline"
+              onClick={() => goTo(currentIndex - 1)}
+            >
               Back
             </Button>
           )}
           {nextLabel && (
             <Button
+              size={"lg"}
               variant="outline"
               onClick={() => {
                 goTo(currentIndex + 1);
