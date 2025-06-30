@@ -47,10 +47,18 @@ export default function Home() {
 
   return (
     <AppProvider>
-      <div className="h-dvh flex flex-col bg-gray-50">
+      <div
+        className="h-dvh flex flex-col"
+        style={{
+          backgroundImage: 'url("/background.png")',
+          backgroundSize: "cover", // Ensures the image covers the full area
+          backgroundPosition: "center", // Keeps the image centered
+          backgroundRepeat: "no-repeat", // Prevents tiling
+        }}
+      >
         {/* 🔼 Top bar (Logo) */}
         <div className="p-8 flex items-center justify-center">
-          <Image src="/logo.svg" alt="Logo" width={112} height={112} />
+          <Image src="/logo.png" alt="Logo" width={150} height={150} />
         </div>
 
         {/* Scrollable screen area */}
